@@ -85,6 +85,10 @@ app.post("/", function(req, res) {
 app.get("/sames", function(req,res) {
 	res.sendfile("./public/index.html");
 })
+app.get("/logout", function(req,res) {
+	req.session.destroy();
+	res.redirect("/")
+})
 app.post("/sames/upload", function(req, res) {
 	upload(req, res, function(err) {
 		if (err) {
