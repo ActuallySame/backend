@@ -52,7 +52,6 @@ app.post("/register",function(req,res) {
 	var user_email = req.body.email;
 	var user_pass = req.body.password;
 	if(user_email === "" || user_pass === "" || user_pass ===""){
-		alert("Please fill in all fields!");
 		res.redirect("/register");
 	}
 
@@ -61,6 +60,13 @@ app.post("/register",function(req,res) {
 	console.log(user_pass);
 	db.users.insert({username:user_email,password:user_pass});
 	res.redirect("/");
+})
+app.get("/logout", function(req,res) {
+	req.session.destroy();
+	res.redirect("/")
+})
+app.get("/", function(req, res) {
+	res.sendfile("./public/login.html")
 })
 app.post("/", function(req, res) {
 	var login_email = req.body.email;
@@ -80,10 +86,7 @@ app.post("/", function(req, res) {
 app.get("/sames", function(req,res) {
 	res.sendfile("./public/home.html");
 })
-app.get("/logout", function(req,res) {
-	req.session.destroy();
-	res.redirect("/")
-})
+
 app.post("/sames/upload", function(req, res) {
 	upload(req, res, function(err) {
 		if (err) {
@@ -96,7 +99,4 @@ app.post("/sames/upload", function(req, res) {
 })
 app.get("/sames/:id", function(req, res) {
 	res.sendfile(__dirname + "/uploads/"+req.params.id);
-})
-app.get("/", function(req, res) {
-	res.sendfile("./public/login.html")
 })
