@@ -70,11 +70,12 @@ app.post("/", function(req, res) {
 	var login_pass = req.body.password;
 	if(login_email === "" || login_pass === ""){
 		alert("Please enter a username and a password!");
-		res.redirect("/register");
+		redirect("/")
 	}
 	login_pass = sha1(login_pass);
 	var result = db.users.count({username:login_email,password:login_pass});
 	if(result>0){
+
 		req.session.user = login_email;
 		res.redirect("/sames")
 	}
