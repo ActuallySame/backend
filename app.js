@@ -1,24 +1,46 @@
-// app.js
-var databaseUrl = "mongodb://localhost/same"; // "username:password@example.com/mydb"
-var collections = ["users"]
-var mongojs = require("mongojs")
-var db = mongojs(databaseUrl, collections);
-var sha1 = require('sha1');
+// Password hashing
+var sha1 		= 	require('sha1');
+
+// configure mongojs
+var mongojs 	= 	require("mongojs")
+var databaseUrl = 	"mongodb://localhost/same"; // "username:password@example.com/mydb"
+var collections = 	["users"]
+var db 			= 	mongojs(databaseUrl, collections);
 
 //build and start up the server.
-var express = require("express");
-var app = express();
-var server = app.listen(8000, function() {
+var express 	= 	require("express");
+var app 		= 	express();
+var server 		= 	app.listen(8000, function() {
     console.log("Listening on port %d", server.address().port)
 })
 
-//Include the body-parser middlewear
-var bodyParser = require("body-parser");
+//Include the body-parser middleware
+var bodyParser 	= 	require("body-parser");
 app.use(bodyParser());
 app.set("view options", {layout: false});
 
-app.use(express.static(__dirname+'/public/'));
+// Include the multer middleware for file uploads
 
+var multer 		= 	require("multer");
+var upload		= 	multer({ dest: "./uploads/" })
+app.use(multer({ dest: './uploads/',
+	rename: function (fieldname, filename) {
+		return filename+Date.now();
+	},
+	onFileUploadStart: function (file) {
+		console.log(file.originalname + ' is starting ...');
+	},
+	onFileUploadComplete: function (file) {
+		console.log(file.fieldname + ' uploaded to  ' + file.path)
+	}
+}));
+
+app.use(express.static(__dirname+"/public/"));
+
+
+
+
+// Routing
 app.get("/", function(req, res) {
 	res.sendfile("./public/login.html")
 })
@@ -49,8 +71,13 @@ app.post("/", function(req, res) {
 app.get("/sames", function(req,res) {
 	res.sendfile("./public/index.html");
 })
-
-
-
-
-app.use(express.static(__dirname+'/public/'));
+app.post("/sames/upload", function(req, res) {
+	upload(req, res, function(err) {
+		if (err) {
+			return res.end("Error uploading photo.")
+		} else {
+			console.log("File is uploaded")
+			return res.end("Great success!!!")
+		}
+	});
+})

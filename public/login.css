@@ -36,7 +36,7 @@ body {
 	margin-top: 150px;
 	margin-right: auto;
 	margin-left: auto;
-	width: 40%;
+	max-width: 400px;
 	background-color: #e5e5e5;
 	height: 330px;
 	text-align: center;
