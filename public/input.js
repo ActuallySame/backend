@@ -11,4 +11,4 @@ $(document).ready ( function(){
 		elem.parentElement.removeChild(elem); 
 	}
 });
-	
+
