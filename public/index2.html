@@ -24,37 +24,12 @@
 			<h1 id="title_header">same.</h1>
 		</div>
 
-		<div id="photo_section_old">
-			<div class="col-md-3 col-sm-4 col-xs-6">
-				<a href="#"><img class="image" id='0' onclick='changeImage(src);' src=""/></a>
-			</div>
 		</div>
 
 		<div id="photo_section"></div>
 
 		<div id="main_image_div"><a href=""><img id="main_image" src="" onclick='changeImage("");'></a></div>
 		<!--<div id="x_div"><a hred=""><img id="x" src="x.png" sizes:"20x20" onclick='changeImage("");'></a></div>-->
-		<script>
-var cw = $('.image').width();
-$('.image').css({
-
-	'height': cw + 'px'
-		// clip: rect(0px,cw + 'px',cw + 'px',0px);
-});
-
-function changeImage(a) {
-	if (a==""){
-		$('#photo_section').fadeTo("medium", 1);
-	}
-	else{
-		$('#photo_section').fadeTo("medium", .2);
-		$('#title_header').fadeTo("medium", .5);
-	}
-
-	setTimeout(function() {document.getElementById("main_image").src=a;},350);
-
-}
-		</script>
 
 	</body>
 	<html>
