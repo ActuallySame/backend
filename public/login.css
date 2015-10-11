@@ -36,9 +36,10 @@ body {
 	margin-top: 150px;
 	margin-right: auto;
 	margin-left: auto;
-	width: 50%;
+	width: 40%;
 	background-color: #e5e5e5;
-	height: 185px;
+	height: 300px;
+	text-align: center;
 
 }	
 #login h1 {
@@ -46,6 +47,35 @@ body {
 }
 #login form {
 	margin:auto;
-}
 
 }
+
+button {
+  background: #d007e8;
+  background-image: -webkit-linear-gradient(top, #d007e8, #9512b0);
+  background-image: -moz-linear-gradient(top, #d007e8, #9512b0);
+  background-image: -ms-linear-gradient(top, #d007e8, #9512b0);
+  background-image: -o-linear-gradient(top, #d007e8, #9512b0);
+  background-image: linear-gradient(to bottom, #d007e8, #9512b0);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+button:hover {
+  background: #e44ff6;
+  background-image: -webkit-linear-gradient(top, #e44ff6, #e786f2);
+  background-image: -moz-linear-gradient(top, #e44ff6, #e786f2);
+  background-image: -ms-linear-gradient(top, #e44ff6, #e786f2);
+  background-image: -o-linear-gradient(top, #e44ff6, #e786f2);
+  background-image: linear-gradient(to bottom, #e44ff6, #e786f2);
+  text-decoration: none;
+}
+.input-group{
+	margin: 5px;
+
