@@ -68,7 +68,7 @@ app.post("/register",function(req,res) {
 app.post("/", function(req, res) {
 	var login_email = req.body.email;
 	var login_pass = req.body.password;
-	if(user_email === "" || user_pass === ""){
+	if(login_email === "" || login_pass === ""){
 		alert("Please enter a username and a password!");
 		res.redirect("/register");
 	}
