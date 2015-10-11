@@ -20,7 +20,6 @@ app.set("view options", {layout: false});
 app.use(express.static(__dirname+'/public/'));
 
 app.get("/", function(req, res) {
-	console.log("huuuuuuuuuuuuuuuuh?")
 	res.sendfile("./public/login.html")
 })
 app.get("/all", function(req, res) {
@@ -41,7 +40,6 @@ app.post("/register",function(req,res) {
 	res.redirect("/");
 })
 app.post("/", function(req, res) {
-	console.log("fk")
 	var login_email = req.body.email;
 	var login_pass = req.body.password;
 	login_pass = sha1(login_pass);
@@ -49,7 +47,6 @@ app.post("/", function(req, res) {
 	res.redirect("/sames");
 })
 app.get("/sames", function(req,res) {
-	console.log("no")
 	res.sendfile("./public/index.html");
 })
 
