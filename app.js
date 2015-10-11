@@ -39,9 +39,6 @@ app.use(express.static(__dirname+"/public/"));
 app.use(express.static(__dirname+"/uploads/"));
 
 // Routing
-app.get("/", function(req, res) {
-	res.sendfile("./public/login.html")
-})
 app.get("/all", function(req, res) {
 	db.users.find({}, function(err, docs) {
 		res.end(JSON.stringify(docs))
@@ -55,7 +52,6 @@ app.post("/register",function(req,res) {
 	var user_email = req.body.email;
 	var user_pass = req.body.password;
 	if(user_email === "" || user_pass === "" || user_pass ===""){
-		alert("Please fill in all fields!");
 		res.redirect("/register");
 	}
 
@@ -65,28 +61,32 @@ app.post("/register",function(req,res) {
 	db.users.insert({username:user_email,password:user_pass});
 	res.redirect("/");
 })
+app.get("/logout", function(req,res) {
+	req.session.destroy();
+	res.redirect("/")
+})
+app.get("/", function(req, res) {
+	res.sendfile("./public/login.html")
+})
 app.post("/", function(req, res) {
 	var login_email = req.body.email;
 	var login_pass = req.body.password;
-	if(user_email === "" || user_pass === ""){
-		alert("Please enter a username and a password!");
-		res.redirect("/register");
-	}
+	if(login_email === "" || login_pass === ""){
+		res.redirect("/")
+	}	
 	login_pass = sha1(login_pass);
 	var result = db.users.count({username:login_email,password:login_pass});
 	if(result>0){
+
 		req.session.user = login_email;
 		res.redirect("/sames")
 	}
 	res.redirect("/");
 })
 app.get("/sames", function(req,res) {
-	res.sendfile("./public/index.html");
+	res.sendfile("./public/home.html");
 })
-app.get("/logout", function(req,res) {
-	req.session.destroy();
-	res.redirect("/")
-})
+
 app.post("/sames/upload", function(req, res) {
 	upload(req, res, function(err) {
 		if (err) {
