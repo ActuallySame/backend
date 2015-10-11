@@ -81,7 +81,7 @@ app.post("/", function(req, res) {
 	res.redirect("/");
 })
 app.get("/sames", function(req,res) {
-	res.sendfile("./public/index.html");
+	res.sendfile("./public/home.html");
 })
 app.get("/logout", function(req,res) {
 	req.session.destroy();
