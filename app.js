@@ -36,8 +36,9 @@ app.use(multer({ dest: './uploads/',
 }));
 
 app.use(express.static(__dirname+"/public/"));
-app.use(express.cookieParser());
-
+app.use express.cookieParser()
+sessionStore = new express.session.MemoryStore
+app.use express.session secret: 'key', store: sessionStore
 
 
 // Routing
