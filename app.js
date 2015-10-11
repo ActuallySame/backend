@@ -53,8 +53,14 @@ app.get("/register", function(req, res) {
 	res.sendfile("./public/register.html")
 })
 app.post("/register",function(req,res) {
+	var user_name = req.body.name
 	var user_email = req.body.email;
 	var user_pass = req.body.password;
+	if(user_email === "" || user_pass === "" || user_pass ===""){
+		alert("Please fill in all fields!");
+		res.redirect("/register");
+	}
+
 	user_pass = sha1(user_pass);
 	console.log(user_email);
 	console.log(user_pass);
@@ -64,9 +70,17 @@ app.post("/register",function(req,res) {
 app.post("/", function(req, res) {
 	var login_email = req.body.email;
 	var login_pass = req.body.password;
+	if(user_email === "" || user_pass === ""){
+		alert("Please enter a username and a password!");
+		res.redirect("/register");
+	}
 	login_pass = sha1(login_pass);
 	var result = db.users.count({username:login_email,password:login_pass});
-	res.redirect("/sames");
+	if(result>0){
+		req.session.user = login_email;
+		res.redirect("/sames")
+	}
+	res.redirect("/");
 })
 app.get("/sames", function(req,res) {
 	res.sendfile("./public/index.html");
