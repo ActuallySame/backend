@@ -3,9 +3,10 @@ var sha1 		= 	require('sha1');
 
 // configure mongojs
 var mongojs 	= 	require("mongojs")
-var databaseUrl = 	"mongodb://localhost/same"; // "username:password@example.com/mydb"
+var databaseUrl = 	"mongodb://naman:berkeley@server.compose.io:same/same"; // "username:password@example.com/mydb"
 var collections = 	["users"]
 var db 			= 	mongojs(databaseUrl, collections);
+db.users.insert({username:"Test User",links:["absurdity.jpg","compose.jpg"]});
 
 //build and start up the server.
 var express 	= 	require("express");
