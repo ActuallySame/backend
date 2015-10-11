@@ -22,9 +22,18 @@
 	<div id="login">
 		<h1>Login</h1>
 		<form method="POST">
-			Email: <input name="email"></input>
-			<br>
-			Password: <input name="password" type="password"></input>
+			<div class="input-group input-group-lg">
+			  <span class="input-group-addon">
+			    <span class="glyphicon glyphicon-envelope"></span>
+			  </span>
+			  <input class="form-control" type="text" placeholder="Email address">
+			</div>
+			<div class="input-group input-group-lg">
+			  <span class="input-group-addon">
+			    <span class="glyphicon glyphicon-lock"></span>
+			  </span>
+			  <input class="form-control" type="password" placeholder="Password">
+			</div> 
 			<br>
 			<button type="submit">Submit</button>
 
