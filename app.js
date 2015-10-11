@@ -22,8 +22,8 @@ app.set("view options", {layout: false});
 // Include the multer middleware for file uploads
 
 var multer 		= 	require("multer");
-var upload		= 	multer({ dest: "./uploads/" })
-app.use(multer({ dest: './uploads/',
+var upload		= 	multer({ dest: "./public/uploads/" })
+app.use(multer({ dest: './public/uploads/',
 	rename: function (fieldname, filename) {
 		return filename+Date.now();
 	},
@@ -36,9 +36,7 @@ app.use(multer({ dest: './uploads/',
 }));
 
 app.use(express.static(__dirname+"/public/"));
-
-
-
+app.use(express.static(__dirname+"/uploads/"));
 
 // Routing
 app.get("/", function(req, res) {
@@ -85,6 +83,10 @@ app.post("/", function(req, res) {
 app.get("/sames", function(req,res) {
 	res.sendfile("./public/index.html");
 })
+app.get("/logout", function(req,res) {
+	req.session.destroy();
+	res.redirect("/")
+})
 app.post("/sames/upload", function(req, res) {
 	upload(req, res, function(err) {
 		if (err) {
@@ -94,4 +96,7 @@ app.post("/sames/upload", function(req, res) {
 			return res.end("Great success!!!")
 		}
 	});
+})
+app.get("/sames/:id", function(req, res) {
+	res.sendfile(__dirname + "/uploads/"+req.params.id);
 })

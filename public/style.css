@@ -23,9 +23,12 @@ body {
 	border-style: solid;
 	border-width: 5px;
 	z-index: 10000;
-	background-color: #e5e5e5
+	background-color: #e5e5e5	
+}
 
-	
+#photo_section {
+	top: 100px;
+	position: relative;
 }
 
 
