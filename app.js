@@ -39,9 +39,6 @@ app.use(express.static(__dirname+"/public/"));
 app.use(express.static(__dirname+"/uploads/"));
 
 // Routing
-app.get("/", function(req, res) {
-	res.sendfile("./public/login.html")
-})
 app.get("/all", function(req, res) {
 	db.users.find({}, function(err, docs) {
 		res.end(JSON.stringify(docs))
@@ -69,9 +66,8 @@ app.post("/", function(req, res) {
 	var login_email = req.body.email;
 	var login_pass = req.body.password;
 	if(login_email === "" || login_pass === ""){
-		alert("Please enter a username and a password!");
-		redirect("/")
-	}
+		res.redirect("/")
+	}	
 	login_pass = sha1(login_pass);
 	var result = db.users.count({username:login_email,password:login_pass});
 	if(result>0){
@@ -100,4 +96,7 @@ app.post("/sames/upload", function(req, res) {
 })
 app.get("/sames/:id", function(req, res) {
 	res.sendfile(__dirname + "/uploads/"+req.params.id);
+})
+app.get("/", function(req, res) {
+	res.sendfile("./public/login.html")
 })
