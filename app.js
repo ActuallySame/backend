@@ -36,7 +36,7 @@ app.use(multer({ dest: './uploads/',
 }));
 
 app.use(express.static(__dirname+"/public/"));
-
+app.use(express.cookieParser());
 
 
 
