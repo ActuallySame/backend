@@ -20,7 +20,8 @@ app.set("view options", {layout: false});
 app.use(express.static(__dirname+'/public/'));
 
 app.get("/", function(req, res) {
-	res.sendfile("./public/index.html")
+	console.log("huuuuuuuuuuuuuuuuh?")
+	res.sendfile("./public/login.html")
 })
 app.get("/all", function(req, res) {
 	db.users.find({}, function(err, docs) {
@@ -37,12 +38,10 @@ app.post("/register",function(req,res) {
 	console.log(user_email);
 	console.log(user_pass);
 	db.users.insert({username:user_email,password:user_pass});
-	res.redirect("/login");
+	res.redirect("/");
 })
-app.get("/login", function(req, res) {
-	res.sendfile("./public/login.html");
-})
-app.post("/login", function(req, res) {
+app.post("/", function(req, res) {
+	console.log("fk")
 	var login_email = req.body.email;
 	var login_pass = req.body.password;
 	login_pass = sha1(login_pass);
@@ -50,7 +49,8 @@ app.post("/login", function(req, res) {
 	res.redirect("/sames");
 })
 app.get("/sames", function(req,res) {
-	res.sendfile("./public/sames.html");
+	console.log("no")
+	res.sendfile("./public/index.html");
 })
 
 
